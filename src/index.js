@@ -2,10 +2,11 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const passport = require("passport");
 
 // Import routes
-const companyRoute = require("./routes/companies");
-const userRoute = require("./routes/user");
+const companyRoute = require("./modules/companies/routes/company");
+const userRoute = require("./modules/users/routes/user");
 
 dotenv.config();
 // Connect to DB
@@ -19,6 +20,7 @@ mongoose.connect(
 
 // Middleware
 app.use(express.json());
+app.use(passport.initialize());
 
 // Route Middlewares
 app.use("/api/companies", companyRoute);
